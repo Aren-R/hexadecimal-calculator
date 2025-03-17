@@ -1,6 +1,10 @@
 # hexadecimal-calculator
 
-## Functional Requirements
+## Videos
+
+https://drive.google.com/drive/folders/1tzluH_shxnKQTWJuG_XE8FCuvncFKhqX?usp=sharing
+
+### Functional Requirements
 
 1. Arithmetic Operations
     * The calculator must support addition (+), subtraction (-), multiplication (*), and division (/).
@@ -31,7 +35,7 @@
     * If a division by zero occurs, an appropriate error message should be returned.
     * If a result exceeds 4 digits, it should be capped, and an error message should be displayed.
 
-## Cloning the repository
+### Cloning the repository
 
 1. Open a terminal
 
