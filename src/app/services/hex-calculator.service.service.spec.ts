@@ -1,10 +1,13 @@
-import { CalculatorService } from './calculator.service';
+import { TestBed } from '@angular/core/testing';
 
-describe('CalculatorService', () => {
-  let service: CalculatorService;
+import { HexCalculatorServiceService } from './hex-calculator.service.service';
+
+describe('HexCalculatorServiceService', () => {
+  let service: HexCalculatorServiceService;
 
   beforeEach(() => {
-    service = new CalculatorService();
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(HexCalculatorServiceService);
   });
 
   it ('should validate input correctly', () => {
@@ -30,5 +33,9 @@ describe('CalculatorService', () => {
 
   it('should not return decimal values', () => {
     expect(() => service.divide('A', '3')).toThrowError('Decimal results not allowed');
+  });
+
+  it('should be created', () => {
+    expect(service).toBeTruthy();
   });
 });

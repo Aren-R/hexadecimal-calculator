@@ -1,5 +1,10 @@
-export class CalculatorService {
-     validateInput(input: string) {
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class HexCalculatorServiceService {
+    validateInput(input: string) {
         if (input.length > 2) {
           throw new Error("Input exceeds 2 digits");  // Ensure correct error message
         }
@@ -44,5 +49,4 @@ export class CalculatorService {
       if (hexResult.length > 4) throw new Error('Output exceeds 4 digits');
       return hexResult;
     }
-  }
-  
+}
