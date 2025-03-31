@@ -9,7 +9,7 @@ describe('HexCalculatorService', () => {
     service = TestBed.inject(HexCalculatorService);
   });
 
-  // Inputting Values
+  // Inputting Values!
   describe('Input Validation', () => {
     it('should accept valid hexadecimal inputs', () => {
       expect(() => service.validateInput('A')).not.toThrowError();
