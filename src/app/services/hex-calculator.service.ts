@@ -6,10 +6,10 @@ import { Injectable } from '@angular/core';
 export class HexCalculatorService {
     validateInput(input: string) {
         if (input.length > 2) {
-          throw new Error("Input exceeds 2 digits");  // Ensure correct error message
+          throw new Error("Input exceeds 2 digits");
         }
         if (!/^[0-9A-F]+$/i.test(input)) {
-          throw new Error("Invalid hexadecimal input"); // This check comes after length check
+          throw new Error("Invalid hexadecimal input");
         }
       }
       
