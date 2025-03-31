@@ -1,26 +1,16 @@
-name: CI - Angular Tests
+name: Angular Tests
 
-on:
-  push:
-    branches:
-      - '**'
+on: [push]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18  # Use the Node.js version your project requires
-          cache: 'npm'
+          node-version: 18
 
-      - name: Install dependencies
-        run: npm ci  # Ensures clean install based on package-lock.json
-
-      - name: Run tests
-        run: npm test -- --watch=false --browsers=ChromeHeadless
+      - run: npm ci
+      - run: npm test -- --watch=false --browsers=ChromeHeadless
