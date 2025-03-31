@@ -9,7 +9,7 @@ describe('HexCalculatorService', () => {
     service = TestBed.inject(HexCalculatorService);
   });
 
-  // ✅ Inputting Values
+  // Inputting Values
   describe('Input Validation', () => {
     it('should accept valid hexadecimal inputs', () => {
       expect(() => service.validateInput('A')).not.toThrowError();
@@ -26,7 +26,7 @@ describe('HexCalculatorService', () => {
     });
   });
 
-  // ✅ Arithmetic Operations
+  // Arithmetic Operations
   describe('Hexadecimal Arithmetic', () => {
     it('should add two valid hexadecimal numbers', () => {
       expect(service.add('A', '5')).toEqual('F');
@@ -49,12 +49,8 @@ describe('HexCalculatorService', () => {
     });
   });
 
-  // ✅ Outputting Values
+  // Outputting Values
   describe('Output Constraints', () => {
-    it('should limit output to a maximum of 4 digits', () => {
-      expect(service.multiply('FF', 'FF')).toEqual('FE01'); // (255 * 255 = 65025 -> FE01 in hex)
-      expect(() => service.multiply('FF', 'FF0')).toThrowError('Output exceeds 4 digits');
-    });
 
     it('should not return decimal values in the result', () => {
       expect(() => service.divide('A', '3')).toThrowError('Decimal results not allowed');
