@@ -1,6 +1,6 @@
 name: Angular & Cypress Tests
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   angular-tests:
