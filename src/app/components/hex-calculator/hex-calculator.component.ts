@@ -2,15 +2,12 @@ import { Component } from '@angular/core';
 import { HexCalculatorService } from '../../services/hex-calculator.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-hex-calculator',
   templateUrl: './hex-calculator.component.html',
   styleUrls: ['./hex-calculator.component.scss'],
-  imports: [CommonModule, FormsModule, ButtonModule, InputTextModule, CardModule],
+  imports: [CommonModule, FormsModule],
 })
 export class HexCalculatorComponent {
   display: string = '';
@@ -19,11 +16,13 @@ export class HexCalculatorComponent {
   operator: string = '';
   result: string = '';
   error: string = '';
+  waitingForSecondOperand: boolean = false;
 
   constructor(private calculatorService: HexCalculatorService) {}
 
   onDigitPress(digit: string) {
-    if (this.result) this.clear(); // start fresh if user taps after a result
+    if (this.error) this.clear();
+    
     if (!this.operator) {
       if (this.firstOperand.length < 2) {
         this.firstOperand += digit;
@@ -33,18 +32,28 @@ export class HexCalculatorComponent {
       if (this.secondOperand.length < 2) {
         this.secondOperand += digit;
         this.display = this.firstOperand + ' ' + this.operator + ' ' + this.secondOperand;
+        this.waitingForSecondOperand = false;
       }
     }
   }
 
   onOperatorPress(op: string) {
+    if (this.error) this.clear();
+    
     if (!this.firstOperand) return;
-    if (this.secondOperand) this.onEqualPress(); // allow chaining
+    
+    if (this.secondOperand) {
+      this.onEqualPress();
+    }
+    
     this.operator = op;
+    this.waitingForSecondOperand = true;
     this.display = this.firstOperand + ' ' + this.operator;
   }
 
   onEqualPress() {
+    if (this.error || !this.operator || !this.secondOperand) return;
+    
     try {
       let res: string = '';
       switch (this.operator) {
@@ -63,12 +72,14 @@ export class HexCalculatorComponent {
         default:
           return;
       }
+      
       this.result = res;
       this.display = res;
       this.firstOperand = res;
       this.secondOperand = '';
       this.operator = '';
       this.error = '';
+      this.waitingForSecondOperand = false;
     } catch (err: any) {
       this.error = err.message;
       this.display = 'Error';
@@ -82,5 +93,6 @@ export class HexCalculatorComponent {
     this.operator = '';
     this.result = '';
     this.error = '';
+    this.waitingForSecondOperand = false;
   }
 }
